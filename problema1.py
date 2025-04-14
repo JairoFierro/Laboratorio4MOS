@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 # Coeficientes de la función objetivo negados 
 # debido a que es un problema de maximización
-c = np.array([-3, -2, -5, 0, 0, 0])  # x1, x2, x3, s1, s2, s3
+c = np.array([-3, -2, -5, 0, 0, 0])  # x1, x2, x3, s1, s2, s3 
 
 # Matriz A de restricciones con variables de holgura
 A = np.array([
