@@ -1,0 +1,28 @@
+Solver command line: ['C:\\Users\\jafie\\anaconda3\\envs\\pyomo_env\\Library\\bin\\glpsol.exe', '--write', 'C:\\Users\\jafie\\AppData\\Local\\Temp\\tmpblllub8k.glpk.raw', '--wglp', 'C:\\Users\\jafie\\AppData\\Local\\Temp\\tmpq6z1cryx.glpk.glp', '--cpxlp', 'C:\\Users\\jafie\\AppData\\Local\\Temp\\tmp686210tb.pyomo.lp']
+
+GLPSOL--GLPK LP/MIP Solver 5.0
+Parameter(s) specified in the command line:
+ --write C:\Users\jafie\AppData\Local\Temp\tmpblllub8k.glpk.raw --wglp C:\Users\jafie\AppData\Local\Temp\tmpq6z1cryx.glpk.glp
+ --cpxlp C:\Users\jafie\AppData\Local\Temp\tmp686210tb.pyomo.lp
+Reading problem data from 'C:\Users\jafie\AppData\Local\Temp\tmp686210tb.pyomo.lp'...
+8 rows, 10 columns, 65 non-zeros
+118 lines were read
+Writing problem data to 'C:\Users\jafie\AppData\Local\Temp\tmpq6z1cryx.glpk.glp'...
+104 lines were written
+GLPK Simplex Optimizer 5.0
+8 rows, 10 columns, 65 non-zeros
+Preprocessing...
+8 rows, 10 columns, 65 non-zeros
+Scaling...
+ A: min|aij| =  1.000e+00  max|aij| =  3.000e+00  ratio =  3.000e+00
+Problem data seem to be well scaled
+Constructing initial basis...
+Size of triangular part is 8
+*     0: obj =  -0.000000000e+00 inf =   0.000e+00 (10)
+*     4: obj =   3.756250000e+02 inf =   0.000e+00 (0)
+OPTIMAL LP SOLUTION FOUND
+Time used:   0.0 secs
+Memory used: 0.0 Mb (35431 bytes)
+Writing basic solution to 'C:\Users\jafie\AppData\Local\Temp\tmpblllub8k.glpk.raw'...
+27 lines were written
+

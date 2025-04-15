@@ -7,6 +7,9 @@ from mpl_toolkits.mplot3d import Axes3D
 
 from pyomo.environ import *
 
+import time
+
+
 class ProblemaTres:
     def __init__(self, n=10,m=8,
                  solver_name='glpk'):
@@ -43,7 +46,7 @@ class ProblemaTres:
         self.model.I = RangeSet(1, self.n)
         self.model.J = RangeSet(1, self.m)
 
-        # Variables
+        # Variable de decisión
         self.model.x = Var(self.model.I, domain=NonNegativeReals)
 
         #Definir función objetivo 
@@ -206,9 +209,19 @@ class ProblemaTres:
         if self.model is None:
             raise ValueError("Model is not set up. Please call setup_model() first")
         
-
         solver = SolverFactory(self.solver_name)
-        self.results = solver.solve(self.model)
+        logfile_path = "glpk_output.log"
+
+        # Ejecutar el solver y guardar la salida
+        self.results = solver.solve(self.model, tee=True, logfile=logfile_path)
+
+        # Leer el archivo de log y contar iteraciones
+        with open(logfile_path, "r") as f:
+            lines = f.readlines()
+            iter_lines = [line for line in lines if line.strip().startswith(("*", " ", "0:")) and "obj =" in line]
+            print(f"\nIteraciones: {len(iter_lines)}")
+            for line in iter_lines:
+                print(line.strip())
 
         return self.results
 
@@ -219,19 +232,27 @@ class ProblemaTres:
             print(f"x{i} = {value(self.model.x[i]):.2f}")
         print(f"Z = {value(self.model.obj):.2f}")
 
+
 if __name__ == "__main__":
 
-    sp_model = ProblemaTres(n=10,m=8, solver_name='glpk')
+    sp_model = ProblemaTres(n=10, m=8, solver_name='glpk')
 
-    # Set up the model
+    print("\nImplementación con Pyomo + GLPK...")
     sp_model.setup_model()
-
-    # Resolver el modelo
+    
+    start_pyomo = time.time()
     results = sp_model.solve_model()
+    end_pyomo = time.time()
 
-    display_results = sp_model.display_model()
+    sp_model.display_model()
+    print(f"Tiempo de ejecución Pyomo + GLPK: {end_pyomo - start_pyomo:.6f} segundos")
 
-    print("\n Resolver con implementación Simplex Estándar propia")
+    print("Implementación implex Estándar")
+    start_simplex = time.time()
     sp_model.solve_with_simplex()
+    end_simplex = time.time()
+
+    print(f"Tiempo de ejecución Simplex Estándar: {end_simplex - start_simplex:.6f} segundos")
+
 
 
